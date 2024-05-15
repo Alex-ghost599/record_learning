@@ -2,7 +2,7 @@
 #2024/5/15  16:02
 
 import numpy as np
-from .prepare_data import prepare_data
+from prepare_data import prepare_data
 
 #目标函数: J(theta) = 1/2m * sum((h(x) - y)^2). h(x) = theta^T * x = theta_0 + theta_1 * x_1 + ... + theta_n * x_n
 #梯度下降算法: theta_j = theta_j - alpha * 1/m * sum((h(x) - y) * x_j)
@@ -27,8 +27,8 @@ class LinearRegression:
         """
         训练模型 按照梯度下降算法更新theta
         """
-        lost_history = self.gradient_descent(alpha, num_iters)
-        return self.theta, lost_history
+        cost_history = self.gradient_descent(alpha, num_iters)
+        return self.theta, cost_history
 
 
     def gradient_descent(self, alpha, num_iters):
@@ -38,7 +38,7 @@ class LinearRegression:
         cost_history = []
         for _ in range(num_iters):
             self.gradient_step(alpha)
-            cost_history.append(self.lost_function(self.data_processed, self.labels))
+            cost_history.append(self.cost_function(self.data_processed, self.labels))
         return cost_history
 
 
@@ -52,15 +52,16 @@ class LinearRegression:
 
         self.theta -= alpha * (1 / num_exmp) * np.dot(self.data_processed.T, error)#h(x) = theta^T * x
 
-    def lost_function(self, data, labels):
+
+    def cost_function(self, data, labels):
         """
         计算损失函数
         """
         num_exmp = data.shape[0]
         prediction = self.hypothesis(data, self.theta)
         error = prediction - labels
-        lost = (1 / (2 * num_exmp)) * np.dot(error.T, error)
-        return lost
+        cost = (1 / 2) * np.dot(error.T, error)/num_exmp
+        return cost[0][0]
 
     @staticmethod
     def hypothesis(data, theta):
@@ -69,12 +70,12 @@ class LinearRegression:
         """
         return np.dot(data, theta)
 
-    def get_lost(self, data, labels):
+    def get_cost(self, data, labels):
         """
         得到损失值
         """
         data, _, _ = prepare_data(data, self.normalized)
-        return self.lost_function(data, labels)
+        return self.cost_function(data, labels)
 
     def predict(self, data):
         """

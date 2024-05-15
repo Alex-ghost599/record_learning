@@ -3,7 +3,7 @@
 #prepares the data for trainning
 
 import numpy as np
-from .normalize import normalize
+from normalize import normalize
 
 
 def prepare_data(data,normalize_data=True):
