@@ -57,8 +57,8 @@ plt.plot(range(num_iters), cost_history)
 plt.xlabel('Iteration')
 plt.ylabel('Cost')
 plt.title('Cost Function')
-plt.show()
 plt.savefig('Bike_Sharing_one_features_cost.png')
+plt.show()
 
 #预测
 prediction_num = 100
@@ -73,7 +73,6 @@ plt.xlabel(input_features_name)
 plt.ylabel(output_features_name)
 plt.title('Bike Sharing')
 plt.legend()
-plt.show()
 plt.savefig('Bike_Sharing_one_features.png')
-
+plt.show()
 
