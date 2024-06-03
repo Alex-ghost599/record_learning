@@ -2,13 +2,14 @@
 #2024/5/15  16:02
 
 import numpy as np
-from prepare_data import prepare_data
+from Learning.utils.prepare_data import prepare_data
 
 #目标函数: J(theta) = 1/2m * sum((h(x) - y)^2). h(x) = theta^T * x = theta_0 + theta_1 * x_1 + ... + theta_n * x_n
 #梯度下降算法: theta_j = theta_j - alpha * 1/m * sum((h(x) - y) * x_j)
 #其中: x_0 = 1, x_1, x_2, ..., x_n 为特征值, y 为标签值, m 为样本数, n 为特征数
 #data: m * n 的矩阵, m 为样本数, n 为特征数
 #labels: m * 1 的矩阵, m 为样本数
+
 
 class LinearRegression:
 
